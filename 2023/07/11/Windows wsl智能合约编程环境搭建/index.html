@@ -1,0 +1,667 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="下载wsl（windows子系统）运行 1wsl --install 但是似乎不能正常启动会报0x80004002之类的错误查了一下针对我遇到的这类错误运行 12Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux 即可，在后来使用的时候也遇到了无法启动的问题，似乎是因为window">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows wsl智能合约编程环境搭建">
+<meta property="og:url" content="http://example.com/2023/07/11/Windows%20wsl%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E7%BC%96%E7%A8%8B%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="下载wsl（windows子系统）运行 1wsl --install 但是似乎不能正常启动会报0x80004002之类的错误查了一下针对我遇到的这类错误运行 12Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux 即可，在后来使用的时候也遇到了无法启动的问题，似乎是因为window">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202307120858980.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202307120919175.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202307120939656.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202307120940842.png">
+<meta property="article:published_time" content="2023-07-11T14:04:07.365Z">
+<meta property="article:modified_time" content="2023-07-12T01:48:09.012Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202307120858980.png">
+  
+  
+  
+  <title>Windows wsl智能合约编程环境搭建 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ghh</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Windows wsl智能合约编程环境搭建"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-07-11 22:04" pubdate>
+          July 11, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.9k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          42 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Windows wsl智能合约编程环境搭建</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="下载wsl（windows子系统）"><a href="#下载wsl（windows子系统）" class="headerlink" title="下载wsl（windows子系统）"></a>下载wsl（windows子系统）</h1><p>运行</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">wsl <span class="hljs-comment">--install</span><br></code></pre></td></tr></table></figure>
+<p>但是似乎不能正常启动<br>会报<br><code>0x80004002</code>之类的错误<br>查了一下针对我遇到的这类错误运行</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><br><span class="hljs-built_in">Enable-WindowsOptionalFeature</span> <span class="hljs-literal">-Online</span> <span class="hljs-literal">-FeatureName</span> Microsoft<span class="hljs-literal">-Windows-Subsystem-Linux</span><br></code></pre></td></tr></table></figure>
+<p>即可，在后来使用的时候也遇到了无法启动的问题，似乎是因为windows更新把子系统的组件删掉了，需要<br>在任务面板中打开程序在windows服务中选择子系统相关的选项即可<br><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202307120858980.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="vscode编程环境搭建"><a href="#vscode编程环境搭建" class="headerlink" title="vscode编程环境搭建"></a>vscode编程环境搭建</h1><h2 id="连接wsl"><a href="#连接wsl" class="headerlink" title="连接wsl"></a>连接wsl</h2><p>可以在vscode中ctrl+shift+p创建wsl窗口<br>或者在wsl中输入code .<br>即可拥有liunx命令行版的vscode</p>
+<h2 id="子系统虚拟环境搭建"><a href="#子系统虚拟环境搭建" class="headerlink" title="子系统虚拟环境搭建"></a>子系统虚拟环境搭建</h2><p>然后配置wsl中的nvm环境<br>首先在创建好的文件夹里执行</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">curl -o- https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/nvm-sh/</span>nvm<span class="hljs-regexp">/v0.39.1/i</span>nstall.sh<br></code></pre></td></tr></table></figure>
+
+
+<p>然后重启wsl即可查看nvm版本</p>
+<p>然后执行</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">nvm <span class="hljs-keyword">install</span> nodejs的版本号<br></code></pre></td></tr></table></figure>
+<p>安装js即可</p>
+<h2 id="代码格式化工具"><a href="#代码格式化工具" class="headerlink" title="代码格式化工具"></a>代码格式化工具</h2><p>再vscode中下载solidity+hardhat（现在改名了变成了solidity一个黄色的以太坊图标）<br>它可以使代码高亮<br>然后再安装一个格式化文件prettier<br>并且配置json文件（ctrl+shift+p选择open setting json）<br>在上一条语句后面加上逗号：<br>把以下语句加入</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs css"><br>    &quot;<span class="hljs-selector-attr">[solidity]</span>&quot;: &#123;<br><br>        &quot;editor<span class="hljs-selector-class">.defaultFormatter</span>&quot;: <span class="hljs-string">&quot;NomicFoundation.hardhat-solidity&quot;</span><br><br>    &#125;,<br>   <br>    &quot;<span class="hljs-selector-attr">[javascript]</span>&quot;: &#123;<br><br>        &quot;editor<span class="hljs-selector-class">.defaultFormatter</span>&quot;:<span class="hljs-string">&quot;esbenp.prettier-vscode&quot;</span><br><br>    &#125;,<br></code></pre></td></tr></table></figure>
+<p>即可实现vs自动格式化<br>当然除此之外还需要打开open user setting<br>配置format on save 和default format</p>
+<p>同样prettier也可以将solidity格式化而不一定要使用hardhat<br>可以通过<br><code>yarn add prettier prettier-plugin-solidity</code><br>安装prettier的solidity插件然后在项目文件夹中创建一个.prettierrc文件，然后输入</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs awk">&#123;<br>    <span class="hljs-regexp">/*  prettier的配置 */</span><br>    <span class="hljs-string">&quot;prettier.printWidth&quot;</span>: <span class="hljs-number">100</span>, <span class="hljs-regexp">//</span> 超过最大值换行<br>    <span class="hljs-string">&quot;prettier.tabWidth&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-regexp">//</span> 缩进字节数<br>    <span class="hljs-string">&quot;prettier.useTabs&quot;</span>: false, <span class="hljs-regexp">//</span> 缩进不使用tab，使用空格<br>    <span class="hljs-string">&quot;prettier.semi&quot;</span>: true, <span class="hljs-regexp">//</span> 句尾添加分号<br>    <span class="hljs-string">&quot;prettier.singleQuote&quot;</span>: true, <span class="hljs-regexp">//</span> 使用单引号代替双引号<br>    <span class="hljs-regexp">//</span>这里只是示例更多相关设置可以自行查询<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="包管理器"><a href="#包管理器" class="headerlink" title="包管理器"></a>包管理器</h2><p>需要安装安装yarn，运行命令corepack enable即可<br>然后获取solc<br>运行 yarn add solc或者npm类命令也可<br>yarn add <a href="mailto:&#x73;&#111;&#108;&#x63;&#x40;&#48;&#x2e;&#x38;&#x2e;&#48;">&#x73;&#111;&#108;&#x63;&#x40;&#48;&#x2e;&#x38;&#x2e;&#48;</a>可指定solc的版本<br>yarn global add solc即可全局安装</p>
+<p>然后运行</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">yarn solcjs <span class="hljs-attr">--bin</span> <span class="hljs-attr">--abi</span> <span class="hljs-attr">--include-path</span> node_modules/ <span class="hljs-attr">--base-path</span> . -o . simple-storage<span class="hljs-selector-class">.sol</span><br><span class="hljs-comment">//注意哈，这里的simple-storage.sol是目录下的文件名</span><br></code></pre></td></tr></table></figure>
+<p>编译simple-storage.sol得到编译后的文件</p>
+<p>同时可以将这个脚本加入到<br><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202307120919175.png" srcset="/img/loading.gif" lazyload><br>即可使用</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">yarn compile</span> <br><br></code></pre></td></tr></table></figure>
+<p>快速编译</p>
+<h1 id="虚拟链上环境"><a href="#虚拟链上环境" class="headerlink" title="虚拟链上环境"></a>虚拟链上环境</h1><h2 id="ganache"><a href="#ganache" class="headerlink" title="ganache"></a>ganache</h2><p>这里选择ganache在windows上安装，当然也可以直接选择在子系统上安装<br>下面是转自github上大佬对相关问题的解决</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">**选项 <span class="hljs-number">1</span>：如果您想在 WSL 本身上安装和运行 Ganache👇**<br><br><span class="hljs-number">1</span>.  在 WSL 上安装 Ganache  <br>    `yarn <span class="hljs-keyword">add </span>ganache`<br>    <br><span class="hljs-number">2</span>.  运行甘纳许  <br>    `yarn run ganache`<br>    <br><span class="hljs-number">3</span>.  从终端屏幕底部 复制 RPC URL ( **<span class="hljs-number">127</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">1</span>:<span class="hljs-number">8545</span> )，上面写着****RPC listening on <span class="hljs-number">127</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">1</span>:<span class="hljs-number">8545</span>**  <br>    并将其粘贴到 ethers.<span class="hljs-keyword">js </span><span class="hljs-keyword">JsonRpcProvider( </span>) 函数参数中。<br>    <br><span class="hljs-number">4</span>.  还要在终端屏幕上滚动时复制任何**私钥，并将其粘贴到 ethers.<span class="hljs-keyword">js </span>Wallet( ) 函数参数中。**<br>    <br><span class="hljs-number">5</span>.  现在让这个终端在后台运行，因为我们希望 Ganache 服务器运行。  <br>    因此，打开一个**新终端** 并通过运行以下命令来运行 deploy.<span class="hljs-keyword">js </span>文件：  <br>    `node deploy.<span class="hljs-keyword">js`</span><br><span class="hljs-keyword"></span>    <br><br>**选项 <span class="hljs-number">2</span>：如果您想在 Windows 上运行 Ganache（如果您已经在 Windows 上安装了 Ganache）👇**<br><br><span class="hljs-number">1</span>.  转到 Ganache Windows GUI 右上角的设置（齿轮图标）。  <br>    移至**服务器**选项卡并将**主机名**更改为**WSL**（我的也适用于 VirtualBox 和 WiFi）  <br>    端口号和网络 ID 可以保持安全。<br>    <br><span class="hljs-number">2</span>.  单击UI 右上角的**保存并重新启动。**<br>    <br><span class="hljs-number">3</span>.  **现在从RPC 服务器**复制 RPC URL 并将其粘贴到 ethers.<span class="hljs-keyword">js </span><span class="hljs-keyword">JsonRpcProvider() </span>函数参数中。<br>    <br><span class="hljs-number">4</span>.  同时复制任何**私钥**并将其粘贴到 ethers.<span class="hljs-keyword">js </span>Wallet( ) 函数参数中。<br>    <br><span class="hljs-number">5</span>.  **重要步骤（防火墙设置）**：  <br>    转到Windows 上**具有高级安全性的 Windows Defender 防火墙。**  <br>    单击**Inbound Rules** &amp; Search for Ganache  <br>    右键单击​​ Ganache &amp; Go to **Properties**。**然后选中显示允许连接的**  <br>    复选框并单击应用。并关闭此防火墙窗口。<br>    <br><span class="hljs-number">6</span>.  通过在 WSL 终端窗口中运行以下命令来运行 deploy.<span class="hljs-keyword">js </span>文件：  <br>    `node deploy.<span class="hljs-keyword">js`</span><br><span class="hljs-keyword"></span>    <br><br>非常感谢所有回答并提出疑问的人。✌<br></code></pre></td></tr></table></figure>
+<p>虽然我在这个地方卡了很久但是最后解决的时候发现并没有那么麻烦，<br>在网络选择上直接选择主机所处的网段地址即可，最大的问题还是各个包的版本问题</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs awk">&#123;<br><br>  <span class="hljs-string">&quot;dependencies&quot;</span>: &#123;<br><br>    <span class="hljs-string">&quot;dotenv&quot;</span>: <span class="hljs-string">&quot;^16.3.1&quot;</span>,<br><br>    <span class="hljs-string">&quot;ethers&quot;</span>: <span class="hljs-string">&quot;5.6.2&quot;</span>,<br><br>    <span class="hljs-string">&quot;fs-extra&quot;</span>: <span class="hljs-string">&quot;^11.1.1&quot;</span>,<br><br>    <span class="hljs-string">&quot;ganache&quot;</span>: <span class="hljs-string">&quot;^7.9.0&quot;</span>,<br><br>    <span class="hljs-string">&quot;solc&quot;</span>: <span class="hljs-string">&quot;0.8.8&quot;</span><br><br>  &#125;,<br>  <span class="hljs-regexp">//</span>非唯一正确版本，仅供参考<br></code></pre></td></tr></table></figure>
+
+<p>此外附上linux的ganache相关命令</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs diff"><span class="hljs-deletion">-a 或 –accounts：指定启动时要创建的测试账户数量。</span><br><span class="hljs-deletion">-e 或 –defaultBalanceEther：分配给每个测试账户的 ether 数量，默认值为 100。</span><br><span class="hljs-deletion">-b 或 r –blockTime：指定自动挖矿的blockTime，以秒为单位，默认值为 0，表示不进行自动挖矿。</span><br><span class="hljs-deletion">-d 或 –deterministic：基于预定的助记词（mnemonic）生成固定的测试账户地址。</span><br><span class="hljs-deletion">-n 或 –secure：默认锁定所有测试账户，有利于进行第三方交易签名。</span><br><span class="hljs-deletion">-m 或 –mnemonic：用于生成测试账户地址的助记词。</span><br><span class="hljs-deletion">-p 或 –port：设置监听端口，默认值为8545。</span><br><span class="hljs-deletion">-h 或 –hostname：设置监听主机，默认值同 NodeJS 的 server.listen()。</span><br><span class="hljs-deletion">-s 或 –seed：设置生成助记词的种子。</span><br><span class="hljs-deletion">-g 或 –gasPrice：设定 Gas 价格， 默认值为 20000000000。</span><br><span class="hljs-deletion">-l 或 –gasLimit：设定 Gas 上限，默认值为 90000。</span><br><span class="hljs-deletion">-f 或 –fork：从一个运行中的以太坊节点客户端软件的指定区块分叉，输入值应当是该节点旳 HTTP 地址和端口，例如 http://localhost:8545。可选使用 @ 标记来指定具体区块，例如：http://localhost:8545@1599200。</span><br><span class="hljs-deletion">-I 或 –networkId：指定网络 id，默认值为当前时间，或使用所分叉链的网络 id。</span><br>–db：设置保存链数据的目录，如果该路径中已经有链数据，ganache-cli 将用它初始化链而不是重新创建。<br>–debug：输出 VM 操作码，用于调试。<br>–mem：输出 ganache-cli 内存使用统计信息，这将替代标准的输出信息。<br>–noVMErrorsOnRPCResponse：不把失败的交易作为 RCP 错误发送，开启这个标志使错误报告方式兼容其他的节点客户端，例如 geth 和 Parity。<br>特殊选项：<br>–account：指定账户私钥和账户余额来创建初始测试账户，可多次设置：<br><br></code></pre></td></tr></table></figure>
+<p>正常运行使用<br><code>yarn run ganache</code>即可</p>
+<h2 id="子系统与主机网络之间的问题（因为网络知识不足不知道如何解决）"><a href="#子系统与主机网络之间的问题（因为网络知识不足不知道如何解决）" class="headerlink" title="子系统与主机网络之间的问题（因为网络知识不足不知道如何解决）"></a>子系统与主机网络之间的问题（因为网络知识不足不知道如何解决）</h2><p>这里使因为前面ganache的问题无法解决而发现的奇怪的地方<br>一开始以为是防火墙的问题导致子系统虚拟机无法访问主机，所以尝试性的区ping了一下，发现子系统确实ping不通。<br>结果阴差阳错之下找到了以为遇到了相同问题的大佬。<br>根据大佬的说法添加一条防火墙规则即可<br>&#96;New-NetFirewallRule -DisplayName “WSL” -Direction Inbound  -InterfaceAlias “vEthernet (WSL)”  -Action Allow<br>似乎还是不行<br>然后区看了下另一篇推荐的博客<br>发现给出上一个建议的博主使用的命令是优化过的版本，原版本是使用ip地址制定规则，但是他给出的是根据wsl的接口制定的规则；<br>原文：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">PS</span> C:\WINDOWS\system32&gt; <span class="hljs-variable">$myIp</span> = (Ubuntu1804 run <span class="hljs-string">&quot;cat /etc/resolv.conf | grep nameserver | cut -d&#x27; &#x27; -f2&quot;</span>)<br><span class="hljs-built_in">PS</span> C:\WINDOWS\system32&gt; <span class="hljs-variable">$myIp</span><br><span class="hljs-number">172.21</span>.<span class="hljs-number">0.1</span><br><span class="hljs-built_in">PS</span> C:\WINDOWS\system32&gt;  <span class="hljs-built_in">New-NetFirewallRule</span> <span class="hljs-literal">-DisplayName</span> <span class="hljs-string">&quot;WSL&quot;</span> <span class="hljs-literal">-Direction</span> Inbound  <span class="hljs-literal">-LocalAddress</span> <span class="hljs-variable">$myIp</span> <span class="hljs-literal">-Action</span> Allow<br></code></pre></td></tr></table></figure>
+<p>理解：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-symbol">$myIp</span>=<span class="hljs-string">&#x27;子系统ip&#x27;</span><br><br><span class="hljs-keyword">New</span>-NetFirewallRule -DisplayName <span class="hljs-string">&quot;WSL&quot;</span> -Direction Inbound  -LocalAddress <span class="hljs-symbol">$myIp</span> -Action Allow<br></code></pre></td></tr></table></figure>
+
+<p>我本来以为那个ip是是子系统ip，但是发现只有当那个ip为空（允许所有本地ip访问）或者ip为主机ip是才能ping通。<br>即：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-symbol">$myIp</span>=<span class="hljs-string">&#x27;主机ip&#x27;</span><br><br><span class="hljs-keyword">New</span>-NetFirewallRule -DisplayName <span class="hljs-string">&quot;WSL&quot;</span> -Direction Inbound  -LocalAddress <span class="hljs-symbol">$myIp</span> -Action Allow<br></code></pre></td></tr></table></figure>
+
+<p>然后我去试了下那个接口的<br>还是ping不通，但是突然想起来我能用wireshark来抓包看一下通过接口的流量啊<br><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202307120939656.png" srcset="/img/loading.gif" lazyload><br>然后又去试了下放子系统ip的<br><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202307120940842.png" srcset="/img/loading.gif" lazyload></p>
+<p>结果是一样的，但是并不知道是哪里出了问题，还请各位大佬指点斧正。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Windows wsl智能合约编程环境搭建</div>
+      <div>http://example.com/2023/07/11/Windows wsl智能合约编程环境搭建/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 11, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/07/12/Pasted%20image%2020230707131830.png/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/06/30/blog%E6%90%AD%E5%BB%BA/" title="blog搭建">
+                        <span class="hidden-mobile">blog搭建</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
