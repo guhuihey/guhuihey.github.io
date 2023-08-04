@@ -1,0 +1,679 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Hardhat 项目创建安装hardhat首先创建一个项目文件夹然后使用yarn init命令初始化项目文件夹接下来就可以直接使用yarn这个包管理工具安装也可以用npm安装 123yarn add --dev hardhat&#x2F;&#x2F;ornpm install --save-dev hardhat 创建项目使用yarn hardhat出现如下界面 选择创建项目然后一路y到底即可 项目开发只要介绍一下各">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hardhat开发">
+<meta property="og:url" content="http://example.com/2023/08/04/Hardhat%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Hardhat 项目创建安装hardhat首先创建一个项目文件夹然后使用yarn init命令初始化项目文件夹接下来就可以直接使用yarn这个包管理工具安装也可以用npm安装 123yarn add --dev hardhat&#x2F;&#x2F;ornpm install --save-dev hardhat 创建项目使用yarn hardhat出现如下界面 选择创建项目然后一路y到底即可 项目开发只要介绍一下各">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308040907881.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308040929484.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308040933498.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308041113490.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308041116656.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308041402669.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308041406022.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308041411772.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308041411348.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308041412030.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308041412277.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308041412315.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308041413099.png">
+<meta property="article:published_time" content="2023-08-03T23:41:39.711Z">
+<meta property="article:modified_time" content="2023-08-04T06:13:25.292Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308040907881.png">
+  
+  
+  
+  <title>Hardhat开发 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ghh</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Hardhat开发"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-08-04 07:41" pubdate>
+          August 4, 2023 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          22k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          186 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Hardhat开发</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Hardhat-项目创建"><a href="#Hardhat-项目创建" class="headerlink" title="Hardhat 项目创建"></a>Hardhat 项目创建</h1><h2 id="安装hardhat"><a href="#安装hardhat" class="headerlink" title="安装hardhat"></a>安装hardhat</h2><p>首先创建一个项目文件夹<br>然后使用<code>yarn init</code>命令初始化项目文件夹<br>接下来就可以直接使用yarn这个包管理工具安装也可以用npm安装</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">yarn <span class="hljs-built_in">add</span> <span class="hljs-comment">--dev hardhat</span><span class="hljs-comment"></span><br><span class="hljs-comment">//or</span><br>npm install <span class="hljs-comment">--save-dev hardhat</span><br></code></pre></td></tr></table></figure>
+<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><p>使用<br><code>yarn hardhat</code><br>出现如下界面<br><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308040907881.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>选择创建项目然后一路y到底即可</p>
+<h1 id="项目开发"><a href="#项目开发" class="headerlink" title="项目开发"></a>项目开发</h1><p>只要介绍一下各个文件夹的作用，我这里会议fundme的智能合约为例</p>
+<h2 id="项目环境配置"><a href="#项目环境配置" class="headerlink" title="项目环境配置"></a>项目环境配置</h2><h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><p>首先的重重之重就是环境变量，在开发时会需要用到一些私密的接口以及密钥等不能向外界传播的数据，但是使用频次也比较高，于是我们就可以使用环境变量来操作这些数据。<br>要在项目中使用这个需要安装一个包<br><code>yarn add --dev dotenv</code><br>然后再项目中创建一个.env文件夹用于存放环境变量<br><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308040929484.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="hardhat-config-js"><a href="#hardhat-config-js" class="headerlink" title="hardhat-config.js"></a>hardhat-config.js</h3><p>然后就是项目中至关重要的一个配置文件，如果没有配置好，那肯定是爆红少不了。<br>测试用的网络配置，插件的配置，以及测试使用的账户配置都在里面<br><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308040933498.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>具体的代码如下</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><code class="hljs dts">require(<span class="hljs-string">&quot;@nomicfoundation/hardhat-toolbox&quot;</span>)<span class="hljs-punctuation">;</span><br><br>require(<span class="hljs-string">&quot;hardhat-deploy&quot;</span>)<span class="hljs-punctuation">;</span><br><br>require(<span class="hljs-string">&quot;dotenv&quot;</span>).config()<span class="hljs-punctuation">;</span><br><br>require(<span class="hljs-string">&quot;@nomiclabs/hardhat-ethers&quot;</span>)<span class="hljs-punctuation">;</span><br><br>require(<span class="hljs-string">&quot;@nomicfoundation/hardhat-verify&quot;</span>)<span class="hljs-punctuation">;</span><br><br>require(<span class="hljs-string">&quot;hardhat-gas-reporter&quot;</span>)<span class="hljs-punctuation">;</span><br><br>  <br><br><span class="hljs-comment">/** @type import(&#x27;hardhat/config&#x27;).HardhatUserConfig */</span><br><br><span class="hljs-comment">//将环境变量赋值给文件中的变量方便使用</span><br><br>const PRIVATE_KEY = process.env.SEPOLIA_PRIVATE_KEY<span class="hljs-punctuation">;</span><br><br>const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL<span class="hljs-punctuation">;</span><br><br>const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY<span class="hljs-punctuation">;</span><br><br>const COINMARKET_API_KEY = process.env.COINMARKET_API_KEY<span class="hljs-punctuation">;</span><br><br>module.<span class="hljs-attr">exports</span> <span class="hljs-operator">=</span> <span class="hljs-punctuation">&#123;</span><br><br>  <span class="hljs-comment">// solidity: &quot;0.8.19&quot;,</span><br><br>  <span class="hljs-comment">//这里是设置solidity的编译版本，通过如下方法可以设置多个版本，只需要一个的花上面的注释内容即可满足</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">  solidity:</span> <span class="hljs-punctuation">&#123;</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">    compilers:</span> [<span class="hljs-punctuation">&#123;</span> version: <span class="hljs-string">&quot;0.8.8&quot;</span> <span class="hljs-punctuation">&#125;</span>, <span class="hljs-punctuation">&#123;</span> version: <span class="hljs-string">&quot;0.6.6&quot;</span> <span class="hljs-punctuation">&#125;</span>],<br><br>  <span class="hljs-punctuation">&#125;</span>,<br><br>  <span class="hljs-comment">//网络配置，这个主要是公链的配置，本地网络的配置就和之前的ganache差不多，运行yarn hardhat node即可</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">  defaultNetwork:</span> <span class="hljs-string">&quot;hardhat&quot;</span>,<br><span class="hljs-symbol"></span><br><span class="hljs-symbol">  networks:</span> <span class="hljs-punctuation">&#123;</span><br><br>    <span class="hljs-comment">// hardhat: &#123;</span><br><br>    <span class="hljs-comment">//   chainId: 31337,</span><br><br>    <span class="hljs-comment">//   // gasPrice: 130000000000,</span><br><br>    <span class="hljs-comment">// &#125;,</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">    sepolia:</span> <span class="hljs-punctuation">&#123;</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">      url:</span> SEPOLIA_RPC_URL,<br><span class="hljs-symbol"></span><br><span class="hljs-symbol">      accounts:</span> [PRIVATE_KEY],<br><span class="hljs-symbol"></span><br><span class="hljs-symbol">      chainId:</span> <span class="hljs-number">11155111</span>,<br><span class="hljs-symbol"></span><br><span class="hljs-symbol">      blockConfirmations:</span> <span class="hljs-number">6</span>,<br><br>    <span class="hljs-punctuation">&#125;</span>,<br><span class="hljs-symbol"></span><br><span class="hljs-symbol">    localhost:</span> <span class="hljs-punctuation">&#123;</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">      url:</span> <span class="hljs-string">&quot;http://127.0.0.1:8545/&quot;</span>,<br><span class="hljs-symbol"></span><br><span class="hljs-symbol">      chainId:</span> <span class="hljs-number">31337</span>,<br><br>    <span class="hljs-punctuation">&#125;</span>,<br><br>  <span class="hljs-punctuation">&#125;</span>,<br><br>  <span class="hljs-comment">//用于查看合约的部署情况</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">  etherscan:</span> <span class="hljs-punctuation">&#123;</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">    apiKey:</span> ETHERSCAN_API_KEY,<br><br>  <span class="hljs-punctuation">&#125;</span>,<br><br>  <span class="hljs-comment">//对合约的gas使用情况进行统计</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">  gasReporter:</span> <span class="hljs-punctuation">&#123;</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">    enabled:</span> false,<br><span class="hljs-symbol"></span><br><span class="hljs-symbol">    outputFile:</span> <span class="hljs-string">&quot;gas-report.txt&quot;</span>,<br><span class="hljs-symbol"></span><br><span class="hljs-symbol">    noColors:</span> true,<br><span class="hljs-symbol"></span><br><span class="hljs-symbol">    currency:</span> <span class="hljs-string">&quot;USD&quot;</span>,<br><br>    <span class="hljs-comment">// coinmarketcap: COINMARKET_API_KEY,</span><br><br>    <span class="hljs-comment">// token: &quot;ETH&quot;,</span><br><br>  <span class="hljs-punctuation">&#125;</span>,<br><br>  <span class="hljs-comment">//使用本地网络时，所用到的账户</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">  namedAccounts:</span> <span class="hljs-punctuation">&#123;</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">    deployer:</span> <span class="hljs-punctuation">&#123;</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">      default:</span> <span class="hljs-number">0</span>,<br><br>    <span class="hljs-punctuation">&#125;</span>,<br><span class="hljs-symbol"></span><br><span class="hljs-symbol">    user:</span> <span class="hljs-punctuation">&#123;</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">      default:</span> <span class="hljs-number">1</span>,<br><br>    <span class="hljs-punctuation">&#125;</span>,<br><br>  <span class="hljs-punctuation">&#125;</span>,<br><br><span class="hljs-punctuation">&#125;;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="mocking"><a href="#mocking" class="headerlink" title="mocking"></a>mocking</h3><p>由于在使用本地网络时无法像在网络上一样得知加密货币与真实货币之间的汇率。<br>我们需要使用solidity搭建一个会在本地返回汇率的工具；<br>这个可以在github上找到这个<br><a target="_blank" rel="noopener" href="https://github.com/smartcontractkit/chainlink/blob/develop/contracts/src/v0.6/FluxAggregator.sol">sol代码</a><br>可以将它直接复制到本地编译也可以通过import把它导入到本地<br><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308041113490.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>至于这个solidity的版本我并没有去尝试更多版本，毕竟这中版本引起的报错真的太难解决了。把这个合约代码写好之后就需要将它部署。因此还需要写一个部署脚本；<br>在部署我们的fundme合约之前部署它即可。<br><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308041116656.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>由于他们是按顺序执行的脚本所以我们将脚本编号；<br>部署的代码如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> &#123; network &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;hardhat&quot;</span>);<br><br><span class="hljs-keyword">const</span> &#123;<br><br>  developmentChains,<br><br>  <span class="hljs-variable constant_">DECIMALS</span>,<br><br>  <span class="hljs-variable constant_">INITIAL_ANSWER</span>,<br><br>&#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;../helper-hardhat-config&quot;</span>);<br><br>  <br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-keyword">async</span> (&#123; getNamedAccounts, deployments &#125;) =&gt; &#123;<br><br>  <span class="hljs-keyword">const</span> &#123; deploy, log &#125; = deployments;<br><br>  <span class="hljs-keyword">const</span> &#123; deployer &#125; = <span class="hljs-keyword">await</span> <span class="hljs-title function_">getNamedAccounts</span>();<br><br>  <span class="hljs-keyword">const</span> chainId = network.<span class="hljs-property">config</span>.<span class="hljs-property">chainId</span>;<br><br>  <br><br>  <span class="hljs-keyword">if</span> (developmentChains.<span class="hljs-title function_">includes</span>(network.<span class="hljs-property">name</span>)) &#123;<br><br>    <span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Local network detected! Deploying mocks..&quot;</span>);<br><br>    <span class="hljs-keyword">await</span> <span class="hljs-title function_">deploy</span>(<span class="hljs-string">&quot;MockV3Aggregator&quot;</span>, &#123;<br><br>      <span class="hljs-attr">contract</span>: <span class="hljs-string">&quot;MockV3Aggregator&quot;</span>,<br><br>      <span class="hljs-attr">from</span>: deployer,<br><br>      <span class="hljs-attr">log</span>: <span class="hljs-literal">true</span>,<br><br>      <span class="hljs-comment">/*下面是传入MockV3Aggregator中的构造参数*/</span><br><br>      <span class="hljs-attr">args</span>: [<span class="hljs-variable constant_">DECIMALS</span>, <span class="hljs-variable constant_">INITIAL_ANSWER</span>],<br><br>    &#125;);<br><br>    <span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Mocks deployed!&quot;</span>);<br><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;-------------------------------------------&quot;</span>);<br><br>  &#125;<br><br>&#125;;<br><br>  <br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span>.<span class="hljs-property">tags</span> = [<span class="hljs-string">&quot;all&quot;</span>, <span class="hljs-string">&quot;mocks&quot;</span>];<br></code></pre></td></tr></table></figure>
+<p>讲到这个mocks的部署代码就不得不讲一下helper-hardhat-config.js中的网络设置了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">const</span> <span class="hljs-variable">networkConfig</span> <span class="hljs-operator">=</span> &#123;<br><br>  <span class="hljs-number">11155111</span>: &#123;<br><br>    name: <span class="hljs-string">&quot;sepolia&quot;</span>,<br><br>    ethUsdPriceFeed: <span class="hljs-string">&quot;0x694AA1769357215DE4FAC081bf1f309aDC325306&quot;</span>,<br><br>  &#125;,<br><br>&#125;;<br><br><span class="hljs-type">const</span> <span class="hljs-variable">developmentChains</span> <span class="hljs-operator">=</span> [<span class="hljs-string">&quot;hardhat&quot;</span>, <span class="hljs-string">&quot;localhost&quot;</span>];<br><span class="hljs-comment">//传递给mock的参数用来初始化feedprice</span><br><span class="hljs-type">const</span> <span class="hljs-variable">DECIMALS</span> <span class="hljs-operator">=</span> <span class="hljs-number">8</span>;<br><br><span class="hljs-type">const</span> <span class="hljs-variable">INITIAL_ANSWER</span> <span class="hljs-operator">=</span> <span class="hljs-number">200000000000</span>;<br><br><span class="hljs-keyword">module</span>.<span class="hljs-keyword">exports</span> = &#123;<br><br>  networkConfig,<br><br>  developmentChains,<br><br>  DECIMALS,<br><br>  INITIAL_ANSWER,<br><br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>这个配置文件可以根据运行时包含的网络选项，从而获取相应的FeedPrice，后面module.exports中的变量可以在导入了这个包中的其他文件中使用</p>
+<h1 id="合约代码及脚本的编写"><a href="#合约代码及脚本的编写" class="headerlink" title="合约代码及脚本的编写"></a>合约代码及脚本的编写</h1><h2 id="合约"><a href="#合约" class="headerlink" title="合约"></a>合约</h2><h3 id="Fundme"><a href="#Fundme" class="headerlink" title="Fundme"></a>Fundme</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-comment">//从用户获取资金</span><br><br><span class="hljs-comment">//撤出资金</span><br><br><span class="hljs-comment">//设置最小支付金额美元</span><br><br><span class="hljs-comment"><span class="hljs-doctag">///</span> @title Storage相关笔记</span><br><br><span class="hljs-comment"><span class="hljs-doctag">///</span> @author</span><br><br><span class="hljs-comment"><span class="hljs-doctag">///</span> @notice immutable和constant还有function中的变量均不会使用Storage中的空间，</span><br><br><span class="hljs-comment"><span class="hljs-doctag">///</span>正常命名的变量都会使用storage中的地址，数组只会将数组长度存储在storage中，</span><br><br><span class="hljs-comment"><span class="hljs-doctag">///</span>然后通过哈希函数操作得到地址存储位置</span><br><br><span class="hljs-comment"><span class="hljs-doctag">///</span>此外constant变量会直接存储在字节码中</span><br><br><span class="hljs-comment">//SPDX-License-Identifier:MIT</span><br><br>pragma solidity ^<span class="hljs-number">0.8</span><span class="hljs-number">.8</span>;<br><br>  <br><br>import <span class="hljs-string">&quot;./PriceConvert.sol&quot;</span>;<br><br>import <span class="hljs-string">&quot;hardhat/console.sol&quot;</span>;<br><br><span class="hljs-function">error <span class="hljs-title">Fundme__NotOwner</span>()</span>;<br><br>  <br><br>contract Fundme &#123;<br><br>    <span class="hljs-comment">//命名规则:immutable变量以i_price，storage变量以s_price;</span><br><br>    <span class="hljs-keyword">using</span> PriceConvert <span class="hljs-keyword">for</span> uint256;<br><br>    uint256 <span class="hljs-keyword">private</span> constant MINIMUMCNY = <span class="hljs-number">50</span> * <span class="hljs-number">10</span> ** <span class="hljs-number">18</span>;<br><br>  <br><br>    address[] <span class="hljs-keyword">private</span> s_funders;<br><br>    mapping(address =&gt; <span class="hljs-built_in">uint</span>) <span class="hljs-keyword">private</span> s_addresstoAmountfunded;<br><br>    address <span class="hljs-keyword">private</span> immutable i_owner;<br><br>    AggregatorV3Interface <span class="hljs-keyword">private</span> s_priceFeed;<br><br>  <br><br>    constructor(address priceFeedAddress) &#123;<br><br>        <span class="hljs-comment">// console.log(&quot;now we constructing&quot;);</span><br><br>        i_owner = msg.sender;<br><br>        s_priceFeed = AggregatorV3Interface(priceFeedAddress);<br><br>    &#125;<br><br>  <br><br>    <span class="hljs-function">function <span class="hljs-title">fund</span>() <span class="hljs-keyword">public</span> payable</span> &#123;<br><br>        require(<br><br>            msg.<span class="hljs-keyword">value</span>.GetConversionRate(s_priceFeed) &gt;= MINIMUMCNY,<br><br>            <span class="hljs-string">&quot;You need to speed more ETH&quot;</span><br><br>        );<br><br>        s_funders.push(msg.sender);<br><br>        s_addresstoAmountfunded[msg.sender] = msg.<span class="hljs-keyword">value</span>;<br><br>    &#125;<br><br>  <br><br>    <span class="hljs-function">function <span class="hljs-title">Withdraw</span>() <span class="hljs-keyword">public</span> onlyOwner</span> &#123;<br><br>        <span class="hljs-keyword">for</span> (<br><br>            uint256 funderIndex = <span class="hljs-number">0</span>;<br><br>            funderIndex &lt; s_funders.length;<br><br>            funderIndex++<br><br>        ) &#123;<br><br>            address funder = s_funders[funderIndex];<br><br>            s_addresstoAmountfunded[funder] = <span class="hljs-number">0</span>;<br><br>        &#125;<br><br>  <br><br>        s_funders = <span class="hljs-keyword">new</span> address[](<span class="hljs-number">0</span>); <span class="hljs-comment">//清空数组</span><br><br>  <br><br>        <span class="hljs-comment">//call</span><br><br>        (<span class="hljs-built_in">bool</span> callSuccess, ) = payable(msg.sender).call&#123;<br><br>            <span class="hljs-keyword">value</span>: address(<span class="hljs-keyword">this</span>).balance<br><br>        &#125;(<span class="hljs-string">&quot;&quot;</span>);<br><br>        require(callSuccess, <span class="hljs-string">&quot;call failed&quot;</span>);<br><br>    &#125;<br><br>  <br><br>    <span class="hljs-function">function <span class="hljs-title">cheaperWithdraw</span>() <span class="hljs-keyword">public</span> onlyOwner</span> &#123;<br><br>        address[] memory funders = s_funders;<br><br>        <span class="hljs-keyword">for</span> (<br><br>            uint256 funderIndex = <span class="hljs-number">0</span>;<br><br>            funderIndex &lt; funders.length;<br><br>            funderIndex++<br><br>        ) &#123;<br><br>            address funder = funders[funderIndex];<br><br>            s_addresstoAmountfunded[funder] = <span class="hljs-number">0</span>;<br><br>        &#125;<br><br>  <br><br>        s_funders = <span class="hljs-keyword">new</span> address[](<span class="hljs-number">0</span>); <span class="hljs-comment">//清空数组</span><br><br>  <br><br>        <span class="hljs-comment">//call</span><br><br>        (<span class="hljs-built_in">bool</span> callSuccess, ) = payable(msg.sender).call&#123;<br><br>            <span class="hljs-keyword">value</span>: address(<span class="hljs-keyword">this</span>).balance<br><br>        &#125;(<span class="hljs-string">&quot;&quot;</span>);<br><br>        require(callSuccess, <span class="hljs-string">&quot;call failed&quot;</span>);<br><br>    &#125;<br><br>  <br><br>    <span class="hljs-comment">//在其他函数前面加上这个修饰器的名字在函数运行前会先进行这里面的判断</span><br><br>    <span class="hljs-comment">//&quot;_;&quot;表是其他代码放在修饰器最前面表示修饰器最后判断，放在最后面表示修饰器最现判断</span><br><br>    <span class="hljs-function">modifier <span class="hljs-title">onlyOwner</span>()</span> &#123;<br><br>        <span class="hljs-comment">// require(msg.sender==owner,Notowner());</span><br><br>        <span class="hljs-keyword">if</span> (msg.sender != i_owner) &#123;<br><br>            <span class="hljs-function">revert <span class="hljs-title">Fundme__NotOwner</span>()</span>;<br><br>        &#125;<br><br>        _;<br><br>    &#125;<br><br>  <br><br>    <span class="hljs-function">function <span class="hljs-title">getOwner</span>() <span class="hljs-keyword">public</span> view <span class="hljs-title">returns</span> (<span class="hljs-params">address</span>)</span> &#123;<br><br>        <span class="hljs-keyword">return</span> i_owner;<br><br>    &#125;<br><br>  <br><br>    <span class="hljs-function">function <span class="hljs-title">getAddressToAmountFunded</span>(<span class="hljs-params"></span></span><br><span class="hljs-params"><span class="hljs-function"></span></span><br><span class="hljs-params"><span class="hljs-function">        address fundingAddress</span></span><br><span class="hljs-params"><span class="hljs-function"></span></span><br><span class="hljs-params"><span class="hljs-function">    </span>) <span class="hljs-keyword">public</span> view <span class="hljs-title">returns</span> (<span class="hljs-params">uint256</span>)</span> &#123;<br><br>        <span class="hljs-keyword">return</span> s_addresstoAmountfunded[fundingAddress];<br><br>    &#125;<br><br>  <br><br>    <span class="hljs-function">function <span class="hljs-title">getVersion</span>() <span class="hljs-keyword">public</span> view <span class="hljs-title">returns</span> (<span class="hljs-params">uint256</span>)</span> &#123;<br><br>        <span class="hljs-keyword">return</span> s_priceFeed.version();<br><br>    &#125;<br><br>  <br><br>    <span class="hljs-function">function <span class="hljs-title">getFunder</span>(<span class="hljs-params">uint256 index</span>) <span class="hljs-keyword">public</span> view <span class="hljs-title">returns</span> (<span class="hljs-params">address</span>)</span> &#123;<br><br>        <span class="hljs-keyword">return</span> s_funders[index];<br><br>    &#125;<br><br>  <br><br>    <span class="hljs-function">function <span class="hljs-title">getPriceFeed</span>() <span class="hljs-keyword">public</span> view <span class="hljs-title">returns</span> (<span class="hljs-params">AggregatorV3Interface</span>)</span> &#123;<br><br>        <span class="hljs-keyword">return</span> s_priceFeed;<br><br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="PriceFeed"><a href="#PriceFeed" class="headerlink" title="PriceFeed"></a>PriceFeed</h3><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">//SPXD-License-Identifier:MIT<br><br>pragma solidity ^<span class="hljs-number">0.8</span><span class="hljs-number">.8</span>;<br><br>  <br><br><span class="hljs-keyword">import</span> &quot;@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol&quot;;<br><br>  <br><br>library PriceConvert &#123;<br><br>    <span class="hljs-keyword">function</span> GetPrice(<br><br>        AggregatorV3Interface priceFeed<br><br>    ) <span class="hljs-type">internal</span> <span class="hljs-keyword">view</span> <span class="hljs-keyword">returns</span> (uint256) &#123;<br><br>        (, <span class="hljs-type">int</span> price, , , ) = priceFeed.latestRoundData();<br><br>        <span class="hljs-keyword">return</span> uint256(price * <span class="hljs-number">1e10</span>);<br><br>    &#125;<br><br>  <br><br>    // <span class="hljs-keyword">function</span> Getversion() <span class="hljs-type">internal</span> <span class="hljs-keyword">view</span> <span class="hljs-keyword">returns</span>(uint256)&#123;<br><br>    // AggregatorV3Interface priceFeed=AggregatorV3Interface(<span class="hljs-number">0x694AA1769357215DE4FAC081bf1f309aDC325306</span>);<br><br>    // <span class="hljs-keyword">return</span> priceFeed.version();<br><br>    //  &#125;<br><br>    <span class="hljs-keyword">function</span> GetConversionRate(<br><br>        uint256 ethAmount,<br><br>        AggregatorV3Interface priceFeed<br><br>    ) <span class="hljs-type">internal</span> <span class="hljs-keyword">view</span> <span class="hljs-keyword">returns</span> (uint256) &#123;<br><br>        uint256 ethprice = GetPrice(priceFeed);<br><br>        uint256 ethAmountInCn = (ethprice * ethAmount) / <span class="hljs-number">1e18</span>;<br><br>        <span class="hljs-keyword">return</span> ethAmountInCn;<br><br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h2><h3 id="mocks部署脚本"><a href="#mocks部署脚本" class="headerlink" title="mocks部署脚本"></a>mocks部署脚本</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> &#123; network &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;hardhat&quot;</span>);<br><br><span class="hljs-keyword">const</span> &#123;<br><br>  developmentChains,<br><br>  <span class="hljs-variable constant_">DECIMALS</span>,<br><br>  <span class="hljs-variable constant_">INITIAL_ANSWER</span>,<br><br>&#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;../helper-hardhat-config&quot;</span>);<br><br>  <br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-keyword">async</span> (&#123; getNamedAccounts, deployments &#125;) =&gt; &#123;<br><br>  <span class="hljs-keyword">const</span> &#123; deploy, log &#125; = deployments;<br><br>  <span class="hljs-keyword">const</span> &#123; deployer &#125; = <span class="hljs-keyword">await</span> <span class="hljs-title function_">getNamedAccounts</span>();<br><br>  <span class="hljs-keyword">const</span> chainId = network.<span class="hljs-property">config</span>.<span class="hljs-property">chainId</span>;<br><br>  <br><br>  <span class="hljs-keyword">if</span> (developmentChains.<span class="hljs-title function_">includes</span>(network.<span class="hljs-property">name</span>)) &#123;<br><br>    <span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Local network detected! Deploying mocks..&quot;</span>);<br><br>    <span class="hljs-keyword">await</span> <span class="hljs-title function_">deploy</span>(<span class="hljs-string">&quot;MockV3Aggregator&quot;</span>, &#123;<br><br>      <span class="hljs-attr">contract</span>: <span class="hljs-string">&quot;MockV3Aggregator&quot;</span>,<br><br>      <span class="hljs-attr">from</span>: deployer,<br><br>      <span class="hljs-attr">log</span>: <span class="hljs-literal">true</span>,<br><br>      <span class="hljs-comment">/*下面是传入MockV3Aggregator中的构造参数*/</span><br><br>      <span class="hljs-attr">args</span>: [<span class="hljs-variable constant_">DECIMALS</span>, <span class="hljs-variable constant_">INITIAL_ANSWER</span>],<br><br>    &#125;);<br><br>    <span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Mocks deployed!&quot;</span>);<br><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;-------------------------------------------&quot;</span>);<br><br>  &#125;<br><br>&#125;;<br><br>  <br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span>.<span class="hljs-property">tags</span> = [<span class="hljs-string">&quot;all&quot;</span>, <span class="hljs-string">&quot;mocks&quot;</span>];<br></code></pre></td></tr></table></figure>
+
+<h3 id="Fundme部署脚本"><a href="#Fundme部署脚本" class="headerlink" title="Fundme部署脚本"></a>Fundme部署脚本</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// async function deployFunc(hre)&#123;</span><br><br><span class="hljs-comment">// hre.getNamedAccounts()</span><br><br><span class="hljs-comment">// hre.deployments</span><br><br>  <br><br><span class="hljs-comment">// &#125;</span><br><br><span class="hljs-comment">// module.exports.default=deployFunc</span><br><br><span class="hljs-comment">//上面的module.exports和下面的写法作用相同</span><br><br><span class="hljs-comment">// module.exports=async(hre)=&gt;&#123;</span><br><br><span class="hljs-comment">//     const&#123;getNamedAccount,deployments&#125;=hre;</span><br><br><span class="hljs-comment">// &#125;</span><br><br>  <br><br><span class="hljs-comment">//const helperConfig=require(&quot;../helper-hardhat-config&quot;)</span><br><br><span class="hljs-comment">//const networkConfig=helperConfig.networkConfig</span><br><br><span class="hljs-keyword">const</span> &#123;<br><br>  networkConfig,<br><br>  developmentChains,<br><br>&#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;../helper-hardhat-config&quot;</span>);<br><br><span class="hljs-keyword">const</span> &#123; network &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;hardhat&quot;</span>);<br><br><span class="hljs-keyword">const</span> &#123; verify &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;../utils/verify&quot;</span>);<br><br>  <br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-keyword">async</span> (&#123; getNamedAccounts, deployments &#125;) =&gt; &#123;<br><br>  <span class="hljs-keyword">const</span> &#123; deploy, log &#125; = deployments;<br><br>  <span class="hljs-keyword">const</span> &#123; deployer &#125; = <span class="hljs-keyword">await</span> <span class="hljs-title function_">getNamedAccounts</span>();<br><br>  <span class="hljs-keyword">const</span> chainId = network.<span class="hljs-property">config</span>.<span class="hljs-property">chainId</span>;<br><br>  <br><br>  <span class="hljs-keyword">let</span> ethUsdPriceFeedAddress;<br><br>  <span class="hljs-keyword">if</span> (developmentChains.<span class="hljs-title function_">includes</span>(network.<span class="hljs-property">name</span>)) &#123;<br><br>    <span class="hljs-keyword">const</span> ethUsdAggregator = <span class="hljs-keyword">await</span> deployments.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;MockV3Aggregator&quot;</span>);<br><br>    ethUsdPriceFeedAddress = ethUsdAggregator.<span class="hljs-property">address</span>;<br><br>  &#125; <span class="hljs-keyword">else</span> &#123;<br><br>    ethUsdPriceFeedAddress = networkConfig[chainId][<span class="hljs-string">&quot;ethUsdPriceFeed&quot;</span>];<br><br>  &#125;<br><br>  <span class="hljs-keyword">const</span> args = [ethUsdPriceFeedAddress];<br><br>  <br><br>  <span class="hljs-keyword">const</span> fundMe = <span class="hljs-keyword">await</span> <span class="hljs-title function_">deploy</span>(<span class="hljs-string">&quot;Fundme&quot;</span>, &#123;<br><br>    <span class="hljs-attr">from</span>: deployer,<br><br>    <span class="hljs-attr">args</span>: args,<br><br>    <span class="hljs-attr">log</span>: <span class="hljs-literal">true</span>,<br><br>    <span class="hljs-attr">waitConfirmations</span>: network.<span class="hljs-property">config</span>.<span class="hljs-property">blockConfirmations</span> || <span class="hljs-number">1</span>,<br><br>  &#125;);<br><br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;fundme deployed&quot;</span>);<br><br>  <span class="hljs-keyword">if</span> (<br><br>    !developmentChains.<span class="hljs-title function_">includes</span>(network.<span class="hljs-property">name</span>) &amp;&amp;<br><br>    process.<span class="hljs-property">env</span>.<span class="hljs-property">ETHERSCAN_API_KEY</span><br><br>  ) &#123;<br><br>    <span class="hljs-comment">//verify</span><br><br>    <span class="hljs-keyword">await</span> <span class="hljs-title function_">verify</span>(fundMe.<span class="hljs-property">address</span>, args);<br><br>  &#125;<br><br>  <span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;----------------------------------------------------&quot;</span>);<br><br>  <br><br>  <span class="hljs-comment">// const ethUsdPriceFeedAddress = networkConfig[chainId][&quot;ethUsdPricceFeed&quot;];</span><br><br>&#125;;<br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span>.<span class="hljs-property">tags</span> = [<span class="hljs-string">&quot;all&quot;</span>, <span class="hljs-string">&quot;fundme&quot;</span>];<br></code></pre></td></tr></table></figure>
+<p>在不部署之后需要对合约进行验证，即verify，但是在verify之前需要等待6各区块我们的部署的这个交易才能确定上链所以这里调用了hardhat.config中的blockConfirmations。</p>
+<h3 id="verify"><a href="#verify" class="headerlink" title="verify"></a>verify</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> &#123; run &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;hardhat&quot;</span>);<br><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">verify</span>(<span class="hljs-params">contractAddress, args</span>) &#123;<br><br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Verifying contract...&quot;</span>);<br><br>  <span class="hljs-keyword">try</span> &#123;<br><br>    <span class="hljs-keyword">await</span> <span class="hljs-title function_">run</span>(<span class="hljs-string">&quot;verify:verify&quot;</span>, &#123;<br><br>      <span class="hljs-attr">address</span>: contractAddress,<br><br>      <span class="hljs-attr">constructorArguments</span>: args,<br><br>    &#125;);<br><br>  &#125; <span class="hljs-keyword">catch</span> (e) &#123;<br><br>    <span class="hljs-keyword">if</span> (e.<span class="hljs-property">message</span>.<span class="hljs-title function_">toLowerCase</span>().<span class="hljs-title function_">includes</span>(<span class="hljs-string">&quot;already verified&quot;</span>)) &#123;<br><br>      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Already Verified!&quot;</span>);<br><br>    &#125; <span class="hljs-keyword">else</span> &#123;<br><br>      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(e);<br><br>    &#125;<br><br>  &#125;<br><br>&#125;<br><br>  <br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123; verify &#125;;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><h3 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h3><p>这个测试是在本地运行的，花了很多时间用来修改因为版本问题出现的报错，注意事项写在代码的注释里了，不再赘述</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br></pre></td><td class="code"><pre><code class="hljs java">const &#123; deployments, ethers, getNamedAccounts &#125; = require(<span class="hljs-string">&quot;hardhat&quot;</span>);<br><br>const &#123; <span class="hljs-keyword">assert</span>, expect &#125; = require(<span class="hljs-string">&quot;chai&quot;</span>);<br><br>const &#123;<br><br>  experimentalAddHardhatNetworkMessageTraceHook,<br><br>&#125; = require(<span class="hljs-string">&quot;hardhat/config&quot;</span>);<br><br>const &#123; developmentChains &#125; = require(<span class="hljs-string">&quot;../../helper-hardhat-config.js&quot;</span>);<br><br>  <br><br><span class="hljs-comment">//describe这里的async要去掉要不然无法运行</span><br><br>!developmentChains.includes(network.name)<br><br>  ? describe.skip<br><br>  : describe(<span class="hljs-string">&quot;fundme&quot;</span>, function () &#123;<br><br>      let fundMe;<br><br>      let deployer;<br><br>      let mockV3Aggregator;<br><br>      <span class="hljs-type">let</span> <span class="hljs-variable">sendValue</span> <span class="hljs-operator">=</span> ethers.parseEther(<span class="hljs-string">&quot;1&quot;</span>);<br><br>      beforeEach(async <span class="hljs-title function_">function</span> <span class="hljs-params">()</span> &#123;<br><br>        <span class="hljs-comment">// console.log(sendValue);</span><br><br>        <span class="hljs-comment">//两种获取</span><br><br>        <span class="hljs-comment">//const accounts=await ethers.getSigners()</span><br><br>        <span class="hljs-comment">//const accountZero =accounts[0]</span><br><br>        deployer = (await <span class="hljs-title function_">getNamedAccounts</span><span class="hljs-params">()</span>).deployer;<br><br>        await deployments.fixture([<span class="hljs-string">&quot;all&quot;</span>]);<br><br>        fundMe = await ethers.getContract(<span class="hljs-string">&quot;Fundme&quot;</span>, deployer);<br><br>        mockV3Aggregator = await ethers.getContract(<br><br>          <span class="hljs-string">&quot;MockV3Aggregator&quot;</span>,<br><br>          deployer<br><br>        );<br><br>      &#125;);<br><br>      describe(<span class="hljs-string">&quot;constractor&quot;</span>, function () &#123;<br><br>        it(<span class="hljs-string">&quot;sets the aggregator addresses correctly&quot;</span>, async <span class="hljs-title function_">function</span> <span class="hljs-params">()</span> &#123;<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">response</span> <span class="hljs-operator">=</span> await fundMe.getPriceFeed();<br><br>          <span class="hljs-comment">//这里因为版本问题需要把address改成target或者getAddress()</span><br><br>          <span class="hljs-keyword">assert</span>.equal(response, mockV3Aggregator.target);<br><br>        &#125;);<br><br>      &#125;);<br><br>      describe(<span class="hljs-string">&quot;fund&quot;</span>, function () &#123;<br><br>        it(<span class="hljs-string">&quot;Fails if you don&#x27;t send enough ETH&quot;</span>, async <span class="hljs-title function_">function</span> <span class="hljs-params">()</span> &#123;<br><br>          await <span class="hljs-title function_">expect</span><span class="hljs-params">(fundMe.fund()</span>).to.be.revertedWith(<br><br>            <span class="hljs-string">&quot;You need to speed more ETH&quot;</span><br><br>          );<br><br>        &#125;);<br><br>        it(<span class="hljs-string">&quot;update the amount funded data structure&quot;</span>, async <span class="hljs-title function_">function</span> <span class="hljs-params">()</span> &#123;<br><br>          await fundMe.fund(&#123; value: sendValue &#125;);<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">response</span> <span class="hljs-operator">=</span> await fundMe.getAddressToAmountFunded(deployer);<br><br>          <span class="hljs-keyword">assert</span>.equal(response.toString(), sendValue.toString());<br><br>        &#125;);<br><br>        it(<span class="hljs-string">&quot;Adds s_funder to array of getFunder&quot;</span>, async <span class="hljs-title function_">function</span> <span class="hljs-params">()</span> &#123;<br><br>          await fundMe.fund(&#123; value: sendValue &#125;);<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">s_funder</span> <span class="hljs-operator">=</span> await fundMe.getFunder(<span class="hljs-number">0</span>);<br><br>          <span class="hljs-keyword">assert</span>.equal(s_funder, deployer);<br><br>        &#125;);<br><br>      &#125;);<br><br>      describe(<span class="hljs-string">&quot;withdraw&quot;</span>, function () &#123;<br><br>        beforeEach(async <span class="hljs-title function_">function</span> <span class="hljs-params">()</span> &#123;<br><br>          await fundMe.fund(&#123; value: sendValue &#125;);<br><br>        &#125;);<br><br>  <br><br>        it(<span class="hljs-string">&quot;Withdraw ETH from a single founder&quot;</span>, async <span class="hljs-title function_">function</span> <span class="hljs-params">()</span> &#123;<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">startingFundMeBalance</span> <span class="hljs-operator">=</span> await ethers.provider.getBalance(<br><br>            fundMe.getAddress()<br><br>          );<br><br>          <span class="hljs-comment">//console.log(startingFundMeBalance);</span><br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">startingDeployBalance</span> <span class="hljs-operator">=</span> await ethers.provider.getBalance(<br><br>            deployer<br><br>          );<br><br>          <span class="hljs-comment">//console.log(startingDeployBalance);</span><br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">transactionResponse</span> <span class="hljs-operator">=</span> await fundMe.Withdraw();<br><br>          <span class="hljs-comment">//这里原本是fundMe.provider.getBalance但是v6变成了现在这样</span><br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">transactionReceipt</span> <span class="hljs-operator">=</span> await transactionResponse.wait();<br><br>          <span class="hljs-comment">//通过调试得知这个不是effectivegasPrice而是gasPrice</span><br><br>          const &#123; gasUsed, gasPrice &#125; = transactionReceipt;<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">gasCost</span> <span class="hljs-operator">=</span> gasUsed * gasPrice;<br><br>          <span class="hljs-comment">//console.log(gasCost);</span><br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">endingFundMeBalance</span> <span class="hljs-operator">=</span> await ethers.provider.getBalance(<br><br>            fundMe.getAddress()<br><br>          );<br><br>          <span class="hljs-comment">//console.log(endingFundMeBalance);</span><br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">endingDeployerBalance</span> <span class="hljs-operator">=</span> await ethers.provider.getBalance(<br><br>            deployer<br><br>          );<br><br>          <span class="hljs-keyword">assert</span>.equal(endingFundMeBalance, <span class="hljs-number">0</span>);<br><br>          <span class="hljs-keyword">assert</span>.equal(<br><br>            (startingFundMeBalance + startingDeployBalance).toString(),<br><br>            (endingDeployerBalance + gasCost).toString()<br><br>          );<br><br>        &#125;);<br><br>        it(<span class="hljs-string">&quot;allows us to withdraw with multiple getFunder&quot;</span>, async <span class="hljs-title function_">function</span> <span class="hljs-params">()</span> &#123;<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">accounts</span> <span class="hljs-operator">=</span> await ethers.getSigners();<br><br>          <span class="hljs-keyword">for</span> (<span class="hljs-type">let</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">6</span>; i++) &#123;<br><br>            <span class="hljs-type">const</span> <span class="hljs-variable">fundMeConnectedContract</span> <span class="hljs-operator">=</span> await fundMe.connect(accounts[i]);<br><br>            await fundMeConnectedContract.fund(&#123; value: sendValue &#125;);<br><br>          &#125;<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">startingFundMeBalance</span> <span class="hljs-operator">=</span> await ethers.provider.getBalance(<br><br>            fundMe.target<br><br>          );<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">startingDeployerBalance</span> <span class="hljs-operator">=</span> await ethers.provider.getBalance(<br><br>            deployer<br><br>          );<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">transactionResponse</span> <span class="hljs-operator">=</span> await fundMe.Withdraw();<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">transactionReceipt</span> <span class="hljs-operator">=</span> await transactionResponse.wait();<br><br>          const &#123; gasUsed, gasPrice &#125; = transactionReceipt;<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">gasCost</span> <span class="hljs-operator">=</span> gasUsed * gasPrice;<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">endingFundMeBalance</span> <span class="hljs-operator">=</span> await ethers.provider.getBalance(<br><br>            fundMe.getAddress()<br><br>          );<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">endingDeployerBalance</span> <span class="hljs-operator">=</span> await ethers.provider.getBalance(<br><br>            deployer<br><br>          );<br><br>          <span class="hljs-keyword">assert</span>.equal(endingFundMeBalance, <span class="hljs-number">0</span>);<br><br>          <span class="hljs-keyword">assert</span>.equal(<br><br>            (startingFundMeBalance + startingDeployerBalance).toString(),<br><br>            (endingDeployerBalance + gasCost).toString()<br><br>          );<br><br>          <span class="hljs-comment">//这里的getFunder改成了gets_funder,但是不改好像没问题</span><br><br>          await <span class="hljs-title function_">expect</span><span class="hljs-params">(fundMe.getFunder(<span class="hljs-number">0</span>)</span>).to.be.reverted;<br><br>          <span class="hljs-keyword">for</span> (i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">6</span>; i++) &#123;<br><br>            <span class="hljs-keyword">assert</span>.equal(<br><br>              await fundMe.getAddressToAmountFunded(accounts[i].address),<br><br>              <span class="hljs-number">0</span><br><br>            );<br><br>          &#125;<br><br>        &#125;);<br><br>        it(<span class="hljs-string">&quot;Only allows the owner to withdraw&quot;</span>, async <span class="hljs-title function_">function</span> <span class="hljs-params">()</span> &#123;<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">accounts</span> <span class="hljs-operator">=</span> await ethers.getSigners();<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">attacker</span> <span class="hljs-operator">=</span> accounts[<span class="hljs-number">1</span>];<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">attackerConnectedContract</span> <span class="hljs-operator">=</span> await fundMe.connect(attacker);<br><br>          <span class="hljs-comment">//这里需要修改revertedWith(&quot;FundMe__NotOwner&quot;)编程下面的样子，可能是因为这是用户自定义错误的问题吧</span><br><br>          await <span class="hljs-title function_">expect</span><span class="hljs-params">(</span><br><span class="hljs-params"></span><br><span class="hljs-params">            attackerConnectedContract.Withdraw()</span><br><br>          ).to.be.revertedWithCustomError(fundMe, <span class="hljs-string">&quot;Fundme__NotOwner&quot;</span>);<br><br>        &#125;);<br><br>      &#125;);<br><br>      describe(<span class="hljs-string">&quot;cheaperwithdraw&quot;</span>, function () &#123;<br><br>        beforeEach(async <span class="hljs-title function_">function</span> <span class="hljs-params">()</span> &#123;<br><br>          await fundMe.fund(&#123; value: sendValue &#125;);<br><br>        &#125;);<br><br>  <br><br>        it(<span class="hljs-string">&quot;cheaperWithdraw ETH from a single founder&quot;</span>, async <span class="hljs-title function_">function</span> <span class="hljs-params">()</span> &#123;<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">startingFundMeBalance</span> <span class="hljs-operator">=</span> await ethers.provider.getBalance(<br><br>            fundMe.getAddress()<br><br>          );<br><br>          <span class="hljs-comment">//console.log(startingFundMeBalance);</span><br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">startingDeployBalance</span> <span class="hljs-operator">=</span> await ethers.provider.getBalance(<br><br>            deployer<br><br>          );<br><br>          <span class="hljs-comment">//console.log(startingDeployBalance);</span><br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">transactionResponse</span> <span class="hljs-operator">=</span> await fundMe.cheaperWithdraw();<br><br>          <span class="hljs-comment">//这里原本是fundMe.provider.getBalance但是v6变成了现在这样</span><br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">transactionReceipt</span> <span class="hljs-operator">=</span> await transactionResponse.wait();<br><br>          <span class="hljs-comment">//通过调试得知这个不是effectivegasPrice而是gasPrice</span><br><br>          const &#123; gasUsed, gasPrice &#125; = transactionReceipt;<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">gasCost</span> <span class="hljs-operator">=</span> gasUsed * gasPrice;<br><br>          <span class="hljs-comment">//console.log(gasCost);</span><br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">endingFundMeBalance</span> <span class="hljs-operator">=</span> await ethers.provider.getBalance(<br><br>            fundMe.getAddress()<br><br>          );<br><br>          <span class="hljs-comment">//console.log(endingFundMeBalance);</span><br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">endingDeployerBalance</span> <span class="hljs-operator">=</span> await ethers.provider.getBalance(<br><br>            deployer<br><br>          );<br><br>          <span class="hljs-keyword">assert</span>.equal(endingFundMeBalance, <span class="hljs-number">0</span>);<br><br>          <span class="hljs-keyword">assert</span>.equal(<br><br>            (startingFundMeBalance + startingDeployBalance).toString(),<br><br>            (endingDeployerBalance + gasCost).toString()<br><br>          );<br><br>        &#125;);<br><br>        it(<span class="hljs-string">&quot;allows us to cheaperwithdraw with multiple getFunder&quot;</span>, async <span class="hljs-title function_">function</span> <span class="hljs-params">()</span> &#123;<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">accounts</span> <span class="hljs-operator">=</span> await ethers.getSigners();<br><br>          <span class="hljs-keyword">for</span> (<span class="hljs-type">let</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">6</span>; i++) &#123;<br><br>            <span class="hljs-type">const</span> <span class="hljs-variable">fundMeConnectedContract</span> <span class="hljs-operator">=</span> await fundMe.connect(accounts[i]);<br><br>            await fundMeConnectedContract.fund(&#123; value: sendValue &#125;);<br><br>          &#125;<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">startingFundMeBalance</span> <span class="hljs-operator">=</span> await ethers.provider.getBalance(<br><br>            fundMe.target<br><br>          );<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">startingDeployerBalance</span> <span class="hljs-operator">=</span> await ethers.provider.getBalance(<br><br>            deployer<br><br>          );<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">transactionResponse</span> <span class="hljs-operator">=</span> await fundMe.cheaperWithdraw();<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">transactionReceipt</span> <span class="hljs-operator">=</span> await transactionResponse.wait();<br><br>          const &#123; gasUsed, gasPrice &#125; = transactionReceipt;<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">gasCost</span> <span class="hljs-operator">=</span> gasUsed * gasPrice;<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">endingFundMeBalance</span> <span class="hljs-operator">=</span> await ethers.provider.getBalance(<br><br>            fundMe.getAddress()<br><br>          );<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">endingDeployerBalance</span> <span class="hljs-operator">=</span> await ethers.provider.getBalance(<br><br>            deployer<br><br>          );<br><br>          <span class="hljs-keyword">assert</span>.equal(endingFundMeBalance, <span class="hljs-number">0</span>);<br><br>          <span class="hljs-keyword">assert</span>.equal(<br><br>            (startingFundMeBalance + startingDeployerBalance).toString(),<br><br>            (endingDeployerBalance + gasCost).toString()<br><br>          );<br><br>          <span class="hljs-comment">//这里的getFunder改成了gets_funder,但是不改好像没问题</span><br><br>          await <span class="hljs-title function_">expect</span><span class="hljs-params">(fundMe.getFunder(<span class="hljs-number">0</span>)</span>).to.be.reverted;<br><br>          <span class="hljs-keyword">for</span> (i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">6</span>; i++) &#123;<br><br>            <span class="hljs-keyword">assert</span>.equal(<br><br>              await fundMe.getAddressToAmountFunded(accounts[i].address),<br><br>              <span class="hljs-number">0</span><br><br>            );<br><br>          &#125;<br><br>        &#125;);<br><br>        it(<span class="hljs-string">&quot;Only allows the owner to cheaperwithdraw&quot;</span>, async <span class="hljs-title function_">function</span> <span class="hljs-params">()</span> &#123;<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">accounts</span> <span class="hljs-operator">=</span> await ethers.getSigners();<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">attacker</span> <span class="hljs-operator">=</span> accounts[<span class="hljs-number">1</span>];<br><br>          <span class="hljs-type">const</span> <span class="hljs-variable">attackerConnectedContract</span> <span class="hljs-operator">=</span> await fundMe.connect(attacker);<br><br>          <span class="hljs-comment">//这里需要修改revertedWith(&quot;FundMe__NotOwner&quot;)编程下面的样子，可能是因为这是用户自定义错误的问题吧</span><br><br>          await <span class="hljs-title function_">expect</span><span class="hljs-params">(</span><br><span class="hljs-params"></span><br><span class="hljs-params">            attackerConnectedContract.Withdraw()</span><br><br>          ).to.be.revertedWithCustomError(fundMe, <span class="hljs-string">&quot;Fundme__NotOwner&quot;</span>);<br><br>        &#125;);<br><br>      &#125;);<br><br>    &#125;);<br></code></pre></td></tr></table></figure>
+<h3 id="集成测试"><a href="#集成测试" class="headerlink" title="集成测试"></a>集成测试</h3><p>因为是在线上环境测试，这里比较容易出现的问题就是钱包里的钱不够，你需要把那个parseETH里面的数字改成0.1个eth</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> &#123; getNamedAccounts, ethers, network &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;hardhat&quot;</span>);<br><br><span class="hljs-keyword">const</span> &#123; developmentChains &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;../../helper-hardhat-config.js&quot;</span>);<br><br><span class="hljs-keyword">const</span> &#123;<br><br>  isCallTrace,<br><br>&#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;hardhat/internal/hardhat-network/stack-traces/message-trace&quot;</span>);<br><br><span class="hljs-keyword">const</span> &#123; assert &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;chai&quot;</span>);<br><br>  <br><br>developmentChains.<span class="hljs-title function_">includes</span>(network.<span class="hljs-property">name</span>)<br><br>  ? describe.<span class="hljs-property">skip</span><br><br>  : <span class="hljs-title function_">describe</span>(<span class="hljs-string">&quot;Fundme&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br><br>      <span class="hljs-keyword">let</span> fundMe;<br><br>      <span class="hljs-keyword">let</span> deployer;<br><br>      <span class="hljs-comment">//这里原本时ethers.utils.parseEther</span><br><br>      <span class="hljs-keyword">const</span> sendValue = ethers.<span class="hljs-title function_">parseEther</span>(<span class="hljs-string">&quot;0.05&quot;</span>);<br><br>      <span class="hljs-title function_">beforeEach</span>(<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br><br>        deployer = (<span class="hljs-keyword">await</span> <span class="hljs-title function_">getNamedAccounts</span>()).<span class="hljs-property">deployer</span>;<br><br>        fundMe = <span class="hljs-keyword">await</span> ethers.<span class="hljs-title function_">getContract</span>(<span class="hljs-string">&quot;Fundme&quot;</span>, deployer);<br><br>      &#125;);<br><br>      <span class="hljs-title function_">it</span>(<span class="hljs-string">&quot;allows people to fund and withdraw&quot;</span>, <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br><br>        <span class="hljs-keyword">await</span> fundMe.<span class="hljs-title function_">fund</span>(&#123; <span class="hljs-attr">value</span>: sendValue &#125;);<br><br>        <span class="hljs-keyword">await</span> fundMe.<span class="hljs-title function_">cheaperWithdraw</span>();<br><br>        <span class="hljs-keyword">const</span> endingBalance = <span class="hljs-keyword">await</span> ethers.<span class="hljs-property">provider</span>.<span class="hljs-title function_">getBalance</span>(fundMe.<span class="hljs-property">target</span>);<br><br>        assert.<span class="hljs-title function_">equal</span>(endingBalance.<span class="hljs-title function_">toString</span>(), <span class="hljs-string">&quot;0&quot;</span>);<br><br>      &#125;);<br><br>    &#125;);<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="快速脚本"><a href="#快速脚本" class="headerlink" title="快速脚本"></a>快速脚本</h2><p>这里我在跟课程的时候写的，但是并不知道有什么用</p>
+<h3 id="fundme"><a href="#fundme" class="headerlink" title="fundme"></a>fundme</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs awk">const &#123; getNamedAccount, ethers, getNamedAccounts &#125; = require(<span class="hljs-string">&quot;hardhat&quot;</span>);<br><br>  <br><br>async <span class="hljs-keyword">function</span> main() &#123;<br><br>  const &#123; deployer &#125; = await getNamedAccounts();<br><br>  const fundMe = await ethers.getContract(<span class="hljs-string">&quot;Fundme&quot;</span>, deployer);<br><br>  console.log(<span class="hljs-string">&quot;Funding Contract...&quot;</span>);<br><br>  const transactionResponse = await fundMe.fund(&#123;<br><br>    value: ethers.parseEther(<span class="hljs-string">&quot;0.1&quot;</span>),<br><br>  &#125;);<br><br>  await transactionResponse.wait(<span class="hljs-number">1</span>);<br><br>  console.log(<span class="hljs-string">&quot;funded&quot;</span>);<br><br>&#125;<br><br>  <br><br>main()<br><br>  .then(() =&gt; process.<span class="hljs-keyword">exit</span>(<span class="hljs-number">0</span>))<br><br>  .catch((error) =&gt; &#123;<br><br>    console.error(error);<br><br>    process.<span class="hljs-keyword">exit</span>(<span class="hljs-number">1</span>);<br><br>  &#125;);<br></code></pre></td></tr></table></figure>
+
+<h3 id="withdraw"><a href="#withdraw" class="headerlink" title="withdraw"></a>withdraw</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs awk">const &#123; getNamedAccounts, ethers &#125; = require(<span class="hljs-string">&quot;hardhat&quot;</span>);<br><br>  <br><br>async <span class="hljs-keyword">function</span> main() &#123;<br><br>  const &#123; deployer &#125; = await getNamedAccounts();<br><br>  const fundMe = await ethers.getContract(<span class="hljs-string">&quot;Fundme&quot;</span>, deployer);<br><br>  console.log(<span class="hljs-string">&quot;Funding...&quot;</span>);<br><br>  const transactionResponse = await fundMe.Withdraw();<br><br>  await transactionResponse.wait(<span class="hljs-number">1</span>);<br><br>  console.log(<span class="hljs-string">&quot;Got it back!&quot;</span>);<br><br>&#125;<br><br>  <br><br>main()<br><br>  .then(() =&gt; process.<span class="hljs-keyword">exit</span>(<span class="hljs-number">0</span>))<br><br>  .catch((error) =&gt; &#123;<br><br>    console.error(error);<br><br>    process.<span class="hljs-keyword">exit</span>(<span class="hljs-number">1</span>);<br><br>  &#125;);<br></code></pre></td></tr></table></figure>
+
+<h2 id="vscode的js调试功能"><a href="#vscode的js调试功能" class="headerlink" title="vscode的js调试功能"></a>vscode的js调试功能</h2><p>在vscode的左边选择调试然后打开一个js调试终端<br><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308041402669.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>然后在调试终端中运行脚本即可</p>
+<p>如果需要查看特定的数据可以直接打开调试控制台输入对应的变量名即可<br><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308041406022.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="上传到github"><a href="#上传到github" class="headerlink" title="上传到github"></a>上传到github</h2><p>先要在github创建仓库<br><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308041411772.png" srcset="/img/loading.gif" lazyload alt="Pasted image 20230803215437.png"></p>
+<p>在github上创建好仓库后<br>在终端输入<br><code>git init -b main</code><br>初始化项目文件夹、<br><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308041411348.png" srcset="/img/loading.gif" lazyload alt="Pasted image 20230803215529.png"></p>
+<p>其中的绿色的是需要上传的，灰色的是在.gitignore中的<br>使用git status可以查看git的暂存状态</p>
+<p><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308041412030.png" srcset="/img/loading.gif" lazyload alt="Pasted image 20230803215839.png"></p>
+<p>使用<br><code>git add .</code><br>即可进行暂存<br>暂存之后的文件就是使用git status展现的如下形式</p>
+<p><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308041412277.png" srcset="/img/loading.gif" lazyload alt="Pasted image 20230803220016.png"></p>
+<p>接下来使用<br><code>git commit -m &#39;first commit&#39;</code><br>这次再使用gitstatus就没有东西了</p>
+<p><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308041412315.png" srcset="/img/loading.gif" lazyload alt="Pasted image 20230803220326.png"></p>
+<p>然后使用<br><code>git remote add origin https://github.com/guhuihey/web3test.git</code><br>连接仓库并命名为origin<br>使用<br><code>git remote -v</code><br>可以查看仓库情况</p>
+<p><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202308041413099.png" srcset="/img/loading.gif" lazyload alt="Pasted image 20230803220824.png"><br>最后通过<br><code>git push origin main</code><br>上传到github既可，当然因为这一步会有一个身份验证，如果无法验证可以创建一个github token以达成目的</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Hardhat开发</div>
+      <div>http://example.com/2023/08/04/Hardhat开发/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>August 4, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/08/04/Pasted%20image%2020230803215437.png/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/07/11/Windows%20wsl%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E7%BC%96%E7%A8%8B%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="Windows wsl智能合约编程环境搭建">
+                        <span class="hidden-mobile">Windows wsl智能合约编程环境搭建</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
