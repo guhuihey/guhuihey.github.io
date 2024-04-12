@@ -23,15 +23,12 @@
 <meta property="og:site_name" content="glnh">
 <meta property="og:description" content="下载wsl（windows子系统）运行 1wsl --install 但是似乎不能正常启动会报0x80004002之类的错误查了一下针对我遇到的这类错误运行 12Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux 即可，在后来使用的时候也遇到了无法启动的问题，似乎是因为window">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202307120858980.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202307120919175.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202307120939656.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202307120940842.png">
+<meta property="og:image" content="http://example.com/img/wsl.jpg">
 <meta property="article:published_time" content="2023-07-11T14:04:07.365Z">
-<meta property="article:modified_time" content="2023-07-12T01:48:09.012Z">
+<meta property="article:modified_time" content="2024-04-12T05:31:08.599Z">
 <meta property="article:author" content="ghh">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202307120858980.png">
+<meta name="twitter:image" content="http://example.com/img/wsl.jpg">
   
   
   
@@ -298,7 +295,7 @@
 <p>同样prettier也可以将solidity格式化而不一定要使用hardhat<br>可以通过<br><code>yarn add prettier prettier-plugin-solidity</code><br>安装prettier的solidity插件然后在项目文件夹中创建一个.prettierrc文件，然后输入</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs awk">&#123;<br>    <span class="hljs-regexp">/*  prettier的配置 */</span><br>    <span class="hljs-string">&quot;prettier.printWidth&quot;</span>: <span class="hljs-number">100</span>, <span class="hljs-regexp">//</span> 超过最大值换行<br>    <span class="hljs-string">&quot;prettier.tabWidth&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-regexp">//</span> 缩进字节数<br>    <span class="hljs-string">&quot;prettier.useTabs&quot;</span>: false, <span class="hljs-regexp">//</span> 缩进不使用tab，使用空格<br>    <span class="hljs-string">&quot;prettier.semi&quot;</span>: true, <span class="hljs-regexp">//</span> 句尾添加分号<br>    <span class="hljs-string">&quot;prettier.singleQuote&quot;</span>: true, <span class="hljs-regexp">//</span> 使用单引号代替双引号<br>    <span class="hljs-regexp">//</span>这里只是示例更多相关设置可以自行查询<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="包管理器"><a href="#包管理器" class="headerlink" title="包管理器"></a>包管理器</h2><p>需要安装安装yarn，运行命令corepack enable即可<br>然后获取solc<br>运行 yarn add solc或者npm类命令也可<br>yarn add <a href="mailto:&#x73;&#111;&#108;&#x63;&#x40;&#48;&#x2e;&#x38;&#x2e;&#48;">&#x73;&#111;&#108;&#x63;&#x40;&#48;&#x2e;&#x38;&#x2e;&#48;</a>可指定solc的版本<br>yarn global add solc即可全局安装</p>
+<h2 id="包管理器"><a href="#包管理器" class="headerlink" title="包管理器"></a>包管理器</h2><p>需要安装安装yarn，运行命令corepack enable即可<br>然后获取solc<br>运行 yarn add solc或者npm类命令也可<br>yarn add <a href="mailto:&#x73;&#x6f;&#108;&#99;&#64;&#x30;&#46;&#x38;&#46;&#48;">&#x73;&#x6f;&#108;&#99;&#64;&#x30;&#46;&#x38;&#46;&#48;</a>可指定solc的版本<br>yarn global add solc即可全局安装</p>
 <p>然后运行</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">yarn solcjs <span class="hljs-attr">--bin</span> <span class="hljs-attr">--abi</span> <span class="hljs-attr">--include-path</span> node_modules/ <span class="hljs-attr">--base-path</span> . -o . simple-storage<span class="hljs-selector-class">.sol</span><br><span class="hljs-comment">//注意哈，这里的simple-storage.sol是目录下的文件名</span><br></code></pre></td></tr></table></figure>
 <p>编译simple-storage.sol得到编译后的文件</p>
