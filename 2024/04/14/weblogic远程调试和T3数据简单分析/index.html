@@ -1,0 +1,646 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ghh">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="最近一直在学习cc链，总感觉学了但是又好像没学，于是想着复现cve来了解一下这些链子的实际使用。在复现的过程中，突然想仔细分析一下它exp的攻击流量，后面发现这个流量似乎使用反序列化去触发rmi连接恶意服务器，但是这里rmi的了解也不是很深，遂简单记一下idea远程调试的配置和t3中一些数据的分析。 自行搭建GitHub - QAX-A-Team&#x2F;WeblogicEnvironment:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="weblogic远程调试和T3反序列化简单分析">
+<meta property="og:url" content="http://example.com/2024/04/14/weblogic%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95%E5%92%8CT3%E6%95%B0%E6%8D%AE%E7%AE%80%E5%8D%95%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="glnh">
+<meta property="og:description" content="最近一直在学习cc链，总感觉学了但是又好像没学，于是想着复现cve来了解一下这些链子的实际使用。在复现的过程中，突然想仔细分析一下它exp的攻击流量，后面发现这个流量似乎使用反序列化去触发rmi连接恶意服务器，但是这里rmi的了解也不是很深，遂简单记一下idea远程调试的配置和t3中一些数据的分析。 自行搭建GitHub - QAX-A-Team&#x2F;WeblogicEnvironment:">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/weblogic.jpg">
+<meta property="article:published_time" content="2024-04-14T07:48:07.037Z">
+<meta property="article:modified_time" content="2024-04-14T08:03:24.599Z">
+<meta property="article:author" content="ghh">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/weblogic.jpg">
+  
+  
+  
+  <title>weblogic远程调试和T3反序列化简单分析 - glnh</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ghh</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="weblogic远程调试和T3反序列化简单分析"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-04-14 15:48" pubdate>
+          April 14, 2024 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.1k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          26 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">weblogic远程调试和T3反序列化简单分析</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>最近一直在学习cc链，总感觉学了但是又好像没学，于是想着复现cve来了解一下这些链子的实际使用。在复现的过程中，突然想仔细分析一下它exp的攻击流量，后面发现这个流量似乎使用反序列化去触发rmi连接恶意服务器，但是这里rmi的了解也不是很深，遂简单记一下idea远程调试的配置和t3中一些数据的分析。</p>
+<h2 id="自行搭建"><a href="#自行搭建" class="headerlink" title="自行搭建"></a>自行搭建</h2><p><a target="_blank" rel="noopener" href="https://github.com/QAX-A-Team/WeblogicEnvironment">GitHub - QAX-A-Team&#x2F;WeblogicEnvironment: Weblogic环境搭建工具</a></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs stylus">构建镜像<br>docker build <span class="hljs-attr">--build-arg</span> JDK_PKG=jdk-<span class="hljs-number">7</span>u21-linux-x64<span class="hljs-selector-class">.tar</span><span class="hljs-selector-class">.gz</span> <span class="hljs-attr">--build-arg</span> WEBLOGIC_JAR=fmw_12.<span class="hljs-number">1.3</span>.<span class="hljs-number">0.0</span>_wls<span class="hljs-selector-class">.jar</span>  -t weblogic:v1 .<br><br><br>运行<br>docker run -d -<span class="hljs-selector-tag">p</span> <span class="hljs-number">7001</span>:<span class="hljs-number">7001</span> -<span class="hljs-selector-tag">p</span> <span class="hljs-number">8453</span>:<span class="hljs-number">8453</span> -<span class="hljs-selector-tag">p</span> <span class="hljs-number">5556</span>:<span class="hljs-number">5556</span> <span class="hljs-attr">--name</span> weblogic we<br><br></code></pre></td></tr></table></figure>
+<p>然后需要使用docker命令将需要调试的目录从虚拟机复制出来，然后作为依赖引入，就可以调试了。</p>
+<h2 id="vulhub-weblogic的idea调试"><a href="#vulhub-weblogic的idea调试" class="headerlink" title="vulhub_weblogic的idea调试"></a>vulhub_weblogic的idea调试</h2><p>首先在docker-compose.yml添加一个端口映射，这个端口映射是用来debug连接的。<br>然后启动容器，进入容器；<br>进入</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/root/</span>Oracle<span class="hljs-regexp">/Middleware/u</span>ser_projects<span class="hljs-regexp">/domains/</span>base_domain/bin<br><br></code></pre></td></tr></table></figure>
+<p>然后在setDomainEnv.sh中添加</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-attribute">debugFlag</span>=<span class="hljs-string">&quot;true&quot;</span><br><span class="hljs-attribute">DEBUG_PORT</span>=44444<br><span class="hljs-built_in">export</span> debugFlag<br></code></pre></td></tr></table></figure>
+
+<p>然后回到宿主机重启docker</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">sudo service docker restart</span><br><span class="hljs-attribute"></span><br><span class="hljs-attribute">docker-compose up -d</span><br></code></pre></td></tr></table></figure>
+<p>然后进入docker将需要的文件复制出来。</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir">docker cp 镜像名<span class="hljs-symbol">:/root/Oracle</span> ./<br></code></pre></td></tr></table></figure>
+<p>这里复制整个就可以，然后通过find命令将其中的jar包提取出来即可。但是这一步我不是很理解，按理来说可以直接将想要查看断点的文件add as lib即可查看，这样会比较方便，但是包不完整。获取上面这一步就是为了解决包不完整的问题吧。<br>具体操作流程如图：<br><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202404141558512.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>然后从外面就可以看到test中的所有jar包可以直接查看了。<br><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202404141558120.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>当然也可以图方便直接将需要看的jar包进行下图操作，这样就可以直接在项目文件夹中查看了。<br><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202404141558473.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>最后只需要配置一下远程调试即可</p>
+<p><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202404141559498.png" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202404141559498.png" srcset="/img/loading.gif" lazyload></p>
+<p>因为我这里在之前docker-compose中设置的是44444端口，所以这里就是虚拟机ip加这个端口即可。<br>然后调试，因为我这里是cve-2018-2628所以我就找了个漏洞的调用栈中的函数断一下。<br><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202404141600748.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>发送paylaod就会发现被断下来了。<br>这里可以参考我们jrmp服务器上设置的payload然后根据使用的攻击链在对应的函数执行点下断点，然后发送paylaod即可，这里我们使用的是cc1的攻击链，所以直接断在transform相关函数即可看到全部的调用栈了。但是如果想要查看t3的实际连接过程就不能断在这里，因为实在找不到调用栈在哪层调用栈。最好是直接定位到<br><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202404141600115.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="简单分析"><a href="#简单分析" class="headerlink" title="简单分析"></a>简单分析</h1><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">void <span class="hljs-keyword">init</span>(Chunk var1, MsgAbbrevJVMConnection var2) throws ClassNotFoundException, IOException &#123;  <br>    <span class="hljs-keyword">super</span>.<span class="hljs-keyword">init</span>(var1, <span class="hljs-number">4</span>);  <br>    <span class="hljs-keyword">this</span>.connection = var2;  <br>    <span class="hljs-keyword">this</span>.responseId = -<span class="hljs-number">1</span>;  <br>    <span class="hljs-keyword">this</span>.user = <span class="hljs-literal">null</span>;  <br>    <span class="hljs-keyword">this</span>.header.readHeader(<span class="hljs-keyword">this</span>, var2.getRemoteHeaderLength());  <br>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.connectionManager.thisRJVM != <span class="hljs-literal">null</span>) &#123;  <br>        <span class="hljs-keyword">this</span>.header.src = <span class="hljs-keyword">this</span>.connectionManager.thisRJVM.getID();  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">this</span>.header.dest = JVMID.localID();  <br>    <span class="hljs-keyword">if</span> (KernelStatus.DEBUG &amp;&amp; debugMessaging.isDebugEnabled()) &#123;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">this</span>.mark(<span class="hljs-keyword">this</span>.header.abbrevOffset);  <br>    <span class="hljs-comment">//这里会跳过很长一段字节，但是原因不是很清楚，但是它刚好跳到了fe01这个位置，这是每个反序列化数据流的前缀，应该算是加了T3特征的反序列化流</span><br>    <span class="hljs-keyword">this</span>.skip((long)(<span class="hljs-keyword">this</span>.header.abbrevOffset - <span class="hljs-keyword">this</span>.pos()));  <br>    var2.readMsgAbbrevs(<span class="hljs-keyword">this</span>);  <br>    <span class="hljs-keyword">this</span>.reset();  <br>    <span class="hljs-keyword">if</span> (JVMID.localID().equals(<span class="hljs-keyword">this</span>.header.dest)) &#123;  <br>        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.header.getFlag(<span class="hljs-number">8</span>)) &#123;  <br>            <span class="hljs-keyword">this</span>.read81Contexts();  <br>        &#125; <span class="hljs-keyword">else</span> &#123;  <br>            <span class="hljs-keyword">this</span>.readExtendedContexts();  <br>        &#125;  <br>    &#125;  <br>  <br>&#125;<br></code></pre></td></tr></table></figure>
+<p>当然喽，虽然我觉得能定位到握手包那里然后一路跟进才是最好的。但是自己实力实在不是很行，看底层通信的实现实在有点费劲，只好定位到网上师傅们说的位置了。这里就是对t3流量进行解析的地方，首先他会初始化一些变量，例如header和pos等参数，这里的pos是用来观测该数据流在代码中解析的重要依据。</p>
+<p>数据解析的第一步：</p>
+<ul>
+<li>初始化变量</li>
+<li>跳过表示长度的四个字节</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202404141600044.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>然后就是readHeader这个函数，通过读取流来完善连接信息（这些信息并不是反序列化数据，而是在后续代码中还要作为处理依据的标志）<br>具体的含义可以参考：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Aliyq0aLJEQt5SRqaYbnrQ">这位大佬的文章</a><br><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202404141602307.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>然后这里readByte是读取消耗一个字节，readInt则是四个，readInt中的具体操作是依次从字节流中读取四个字节然后进行左位移操作，不是很懂，但是只知道很牛逼。因为得到的abbrevOffset值，是从连接信息（header）到真正需要反序列化的数据间的距离。</p>
+<p><img src="https://raw.githubusercontent.com/guhuihey/IMG/main/img/202404141601766.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>然后就是走完上述流程就会进去InboundMsgAbbrev#readMsgAbbrevs，开始真整的反序列化过程。依次进入同一个类中的read和readObject，最后在</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs aspectj"><span class="hljs-keyword">private</span> <span class="hljs-function">Object <span class="hljs-title">readObject</span><span class="hljs-params">(MsgAbbrevInputStream var1)</span> <span class="hljs-keyword">throws</span> IOException, ClassNotFoundException </span>&#123;  <br>    <span class="hljs-keyword">int</span> var2 = var1.read();  <br>    <span class="hljs-keyword">switch</span> (var2) &#123;  <br>        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:  <br>            <span class="hljs-keyword">return</span> (<span class="hljs-keyword">new</span> ServerChannelInputStream(var1)).readObject();  <br>        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:  <br>            <span class="hljs-keyword">return</span> var1.readASCII();  <br>        <span class="hljs-keyword">default</span>:  <br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> StreamCorruptedException(<span class="hljs-string">&quot;Unknown typecode: &#x27;&quot;</span> + var2 + <span class="hljs-string">&quot;&#x27;&quot;</span>);  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+<p>进入在这里的case0中进入正式反序列化。这里本来是想继续分析的，但是仔细看了一下，发现在没有连接JRMP服务端时，打的就是cc1，使用rmi服务去请求我设置好的JRMP服务端，这就是exp所作的事。因为想做流量分析但是对rmi了解不是很深刻，所以打算后续深入学习一下rmi后再一并进行流量的分析。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>weblogic远程调试和T3反序列化简单分析</div>
+      <div>http://example.com/2024/04/14/weblogic远程调试和T3数据简单分析/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>ghh</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 14, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/04/12/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%AD%A6%E4%B9%A0_CommonsCollections_1/" title="Java反序列化学习_CommonsCollections_1">
+                        <span class="hidden-mobile">Java反序列化学习_CommonsCollections_1</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
